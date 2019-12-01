@@ -37,7 +37,7 @@ export interface Status {
 }
 
 export interface Stock {
-  stock: string
+  is_stock: boolean
   id: number
 }
 
