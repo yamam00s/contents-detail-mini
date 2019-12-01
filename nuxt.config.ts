@@ -18,5 +18,6 @@ export default {
   modules: [
     "@nuxtjs/axios",
   ],
-  axios: {}
+  axios: {},
+  plugins: [ '~/plugins/dayjs.ts' ]
 }

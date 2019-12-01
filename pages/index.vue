@@ -25,9 +25,9 @@ export default class contents extends Vue {
     await this.fetchContents()
     await this.fetchStatus()
     await this.fetchStock()
+    console.log(this.$dayjs('2018-08-08'))
   }
 }
 </script>
 
 <style scoped></style>
-ya
