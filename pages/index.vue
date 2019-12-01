@@ -18,7 +18,7 @@ import ContentsLot from "~/components/ContentsLot.vue"
 import ContentsTerm from "~/components/ContentsTerm.vue"
 // class
 import ConentsDetail from "~/assets/ts/ContentsDetail"
-
+import ConentsDetailLot from "~/assets/ts/ContentsDetailLot"
 
 @Component({
   components: {
@@ -40,13 +40,13 @@ export default class contents extends Vue {
   }
 
   created() {
-    const conentsDetail = new ConentsDetail({
+    const conentsDetail = new ConentsDetailLot({
       contents: this.contents,
       status: this.status,
       stock: this.stock
     })
 
-    conentsDetail.checkTerm()
+    conentsDetail.lotInit()
   }
 
   async fetch (context: Context) {
