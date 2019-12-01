@@ -15,11 +15,16 @@ import { Contents } from "~/types";
 @Component({})
 export default class contents extends Vue {
   @Getter("contents/contents") contents!: Contents
+  @Getter("contents/status") status!: Contents
+  @Getter("contents/stock") stock!: Contents
   @Action("contents/fetchContents") fetchContents!: any
+  @Action("contents/fetchStatus") fetchStatus!: any
+  @Action("contents/fetchStock") fetchStock!: any
 
   async mounted() {
     await this.fetchContents()
-    console.log(this.contents)
+    await this.fetchStatus()
+    await this.fetchStock()
   }
 }
 </script>

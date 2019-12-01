@@ -30,3 +30,14 @@ export interface Contents {
   started_day: string
   end_day: string
 }
+
+export interface Status {
+  is_favorit: boolean
+  code: string
+}
+
+export interface Stock {
+  stock: string
+  id: number
+}
+
