@@ -18,8 +18,10 @@ export default class ConentsDetail {
   }
 
   // 在庫の確認
-  public checkStock(): boolean {
-    return this.stock.is_stock
+  public checkStock(): void {
+    if (!this.stock.is_stock) {
+      this.errorHandring('在庫切れです')
+    }
   }
 
   // 日付の確認
