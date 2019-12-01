@@ -12,10 +12,14 @@ import {
 import { Getter, Action } from "vuex-class"
 import { Context } from "@nuxt/types"
 import { Contents, Status, Stock } from "~/types"
-
+// components
 import ContentsFirst from "~/components/ContentsFirst.vue"
 import ContentsLot from "~/components/ContentsLot.vue"
 import ContentsTerm from "~/components/ContentsTerm.vue"
+// class
+import ConentsDetail from "~/assets/ts/ContentsDetail"
+
+
 @Component({
   components: {
     ContentsFirst,
@@ -33,6 +37,16 @@ export default class contents extends Vue {
 
   get componentsName(): string {
     return `Contents${this.contents.contents_type}`
+  }
+
+  created() {
+    const conentsDetail = new ConentsDetail({
+      contents: this.contents,
+      status: this.status,
+      stock: this.stock
+    })
+
+    conentsDetail.checkTerm()
   }
 
   async fetch (context: Context) {
