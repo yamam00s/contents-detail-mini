@@ -1,14 +1,7 @@
 <template>
-  <section>
-    <h1 class="header">Nuxt TypeScript Starter</h1>
-    <div class="cards">
-      <Card
-        v-for="person in people"
-        :key="person.id"
-        :person="person"
-      ></Card>
-    </div>
-  </section>
+  <div>
+    Nuxt TypeScript Starter
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,27 +9,20 @@ import {
   Component,
   Vue
 } from "nuxt-property-decorator"
-import { State } from "vuex-class"
-import { Person } from "~/types";
-import Card from "~/components/Card.vue"
+import { Getter, Action } from "vuex-class"
+import { Contents } from "~/types";
 
-@Component({
-  components: {
-    Card
+@Component({})
+export default class contents extends Vue {
+  @Getter("contents/contents") contents!: Contents
+  @Action("contents/fetchContents") fetchContents!: any
+
+  async mounted() {
+    await this.fetchContents()
+    console.log(this.contents)
   }
-})
-export default class extends Vue {
-  @State people!: Person
 }
 </script>
 
-<style scoped>
-.header {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-}
-</style>
+<style scoped></style>
+ya

@@ -1,0 +1,6 @@
+{
+  "name": "contents",
+  "contents_type": "lot", // member or first or lot or term
+  "started_day": 20191201034500,
+  "end_day": 20191231034500
+}
