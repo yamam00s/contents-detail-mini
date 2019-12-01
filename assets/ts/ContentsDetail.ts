@@ -12,13 +12,23 @@ export default class ConentsDetail {
     Object.assign(this, init);
   }
 
+  // エラー処理
+  private errorHandring(message: string): void {
+    console.log(message)
+  }
+
   // 在庫の確認
   public checkStock(): boolean {
     return this.stock.is_stock
   }
 
-  // 在庫の確認
+  // 日付の確認
   public checkTerm(): void {
-    console.log(dayjs(this.contents.started_day))
+    if (dayjs().isBefore(this.contents.started_day)) {
+      this.errorHandring('期間前です')
+    }
+    if (dayjs().isAfter(this.contents.end_day)) {
+      this.errorHandring('期間が終了しています')
+    }
   }
 }
