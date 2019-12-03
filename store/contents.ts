@@ -40,13 +40,13 @@ export const actions: ActionTree<RootState, RootState> = {
     const resupoce = await this.$axios.$get("./contents-detail-stock.json")
     commit("setStock", resupoce)
   },
-  async postFirstCoupon() {
+  async postFirstContents() {
     await this.$axios.$post("")
   },
-  async postLotCoupon() {
+  async postLotContents() {
     await this.$axios.$post("")
   },
-  async postTermCoupon() {
+  async postTermContents() {
     await this.$axios.$post("")
   }
 }
