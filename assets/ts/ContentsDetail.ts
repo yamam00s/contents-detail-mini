@@ -13,7 +13,7 @@ export default class ConentsDetail {
   }
 
   // エラー処理
-  private errorHandring(message: string): void {
+  public errorHandring(message: string): void {
     console.log(message)
   }
 

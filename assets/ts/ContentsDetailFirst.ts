@@ -12,4 +12,8 @@ export default class ContentsDetailFirst extends ConentsDetail {
     this.checkStock()
     this.checkTerm()
   }
+
+  public async dispatchCoupon(dispatch: () => Promise<void>): Promise<void> {
+    await dispatch().catch(() => this.errorHandring('先着クーポン発行エラー'))
+  }
 }
