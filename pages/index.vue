@@ -1,6 +1,9 @@
 <template>
   <div>
-    <component :is="componentsName" :contents="contents" ></component>
+    <component
+      :is="componentsName"
+      :contents="contents"
+    />
   </div>
 </template>
 
@@ -37,6 +40,9 @@ export default class contents extends Vue {
   // @Action('contents/fetchStatus') fetchStatus!: any
   // @Action('contents/fetchStock') fetchStock!: any
 
+  // TODO 型安全ではない
+  contentsDetail!: ConentsDetailFirst | ConentsDetailLot | ConentsDetailTerm
+
   get componentsName(): string {
     return `Contents${this.contents.contents_type}`
   }
@@ -48,13 +54,12 @@ export default class contents extends Vue {
       status: this.status,
       stock: this.stock
     }
-    let contentsDetail
 
-    if (typeName === 'First') contentsDetail = new ConentsDetailFirst(initItem)
-    if (typeName === 'Lot') contentsDetail = new ConentsDetailLot(initItem)
-    if (typeName === 'Term') contentsDetail = new ConentsDetailTerm(initItem)
+    if (typeName === 'First') this.contentsDetail = new ConentsDetailFirst(initItem)
+    if (typeName === 'Lot') this.contentsDetail = new ConentsDetailLot(initItem)
+    if (typeName === 'Term') this.contentsDetail = new ConentsDetailTerm(initItem)
 
-    if (contentsDetail) contentsDetail.init()
+    if (this.contentsDetail) this.contentsDetail.init()
   }
 
   async fetch (context: Context) {
