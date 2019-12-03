@@ -1,6 +1,12 @@
 <template>
   <div class="contents">
     ContentsTerm
+    <button
+      type="button"
+      @click="$emit('dispatch-contents')"
+    >
+      時限発行する
+    </button>
   </div>
 </template>
 

@@ -1,6 +1,12 @@
 <template>
   <div class="contents">
     ContentsFirst
+    <button
+      type="button"
+      @click="$emit('dispatch-contents')"
+    >
+      発行する
+    </button>
   </div>
 </template>
 

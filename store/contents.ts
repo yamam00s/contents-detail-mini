@@ -42,11 +42,14 @@ export const actions: ActionTree<RootState, RootState> = {
   },
   async postFirstContents() {
     await this.$axios.$post("")
+    console.log('先着発行')
   },
   async postLotContents() {
     await this.$axios.$post("")
+    console.log('抽選発行')
   },
   async postTermContents() {
     await this.$axios.$post("")
+    console.log('時限発行')
   }
 }

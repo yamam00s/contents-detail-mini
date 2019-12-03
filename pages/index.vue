@@ -3,6 +3,7 @@
     <component
       :is="componentsName"
       :contents="contents"
+      @dispatch-contents="dispatchContents"
     />
   </div>
 </template>
@@ -36,15 +37,23 @@ export default class contents extends Vue {
   @Getter('contents/contents') contents!: Contents
   @Getter('contents/status') status!: Status
   @Getter('contents/stock') stock!: Stock
-  // @Action('contents/fetchContents') fetchContents!: any
-  // @Action('contents/fetchStatus') fetchStatus!: any
-  // @Action('contents/fetchStock') fetchStock!: any
+  @Action('contents/postFirstContents') postFirstContents!: any
+  @Action('contents/postLotContents') postLotContents!: any
+  @Action('contents/postTermContents') postTermContents!: any
 
   // TODO 型安全ではない
   contentsDetail!: ConentsDetailFirst | ConentsDetailLot | ConentsDetailTerm
+  contentsAction!: () => Promise<void>
 
   get componentsName(): string {
     return `Contents${this.contents.contents_type}`
+  }
+
+  private async dispatchContents(): Promise<void> {
+    const action = this.postFirstContents
+    await this.contentsDetail.dispatchContents(
+      this.contentsAction
+    )
   }
 
   created() {
@@ -55,9 +64,18 @@ export default class contents extends Vue {
       stock: this.stock
     }
 
-    if (typeName === 'First') this.contentsDetail = new ConentsDetailFirst(initItem)
-    if (typeName === 'Lot') this.contentsDetail = new ConentsDetailLot(initItem)
-    if (typeName === 'Term') this.contentsDetail = new ConentsDetailTerm(initItem)
+    if (typeName === 'First') {
+      this.contentsDetail = new ConentsDetailFirst(initItem)
+      this.contentsAction = this.postFirstContents
+    }
+    if (typeName === 'Lot') {
+      this.contentsDetail = new ConentsDetailLot(initItem)
+      this.contentsAction = this.postLotContents
+    }
+    if (typeName === 'Term') {
+      this.contentsDetail = new ConentsDetailTerm(initItem)
+      this.contentsAction = this.postTermContents
+    }
 
     if (this.contentsDetail) this.contentsDetail.init()
   }

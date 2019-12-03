@@ -1,6 +1,12 @@
 <template>
   <div class="contents">
     ContentsLot
+    <button
+      type="button"
+      @click="$emit('dispatch-contents')"
+    >
+      抽選する
+    </button>
   </div>
 </template>
 
