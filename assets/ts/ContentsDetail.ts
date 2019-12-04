@@ -20,24 +20,24 @@ export default class ConentsDetail {
   }
 
   // エラー処理
-  public errorHandring(message: string): void {
+  public unusableHandring(message: string): void {
     this._unusableMessage = message
   }
 
   // 在庫の確認
   public checkStock(): void {
     if (!this.stock.is_stock) {
-      this.errorHandring('在庫切れです')
+      this.unusableHandring('在庫切れです')
     }
   }
 
   // 日付の確認
   public checkTerm(): void {
     if (dayjs().isBefore(this.contents.started_day)) {
-      this.errorHandring('期間前です')
+      this.unusableHandring('期間前です')
     }
     if (dayjs().isAfter(this.contents.end_day)) {
-      this.errorHandring('期間が終了しています')
+      this.unusableHandring('期間が終了しています')
     }
   }
 }

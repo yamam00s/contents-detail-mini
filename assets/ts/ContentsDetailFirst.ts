@@ -14,6 +14,6 @@ export default class ContentsDetailFirst extends ConentsDetail {
   }
 
   public async dispatchContents(dispatch: () => Promise<void>): Promise<void> {
-    await dispatch().catch(() => this.errorHandring('先着クーポン発行エラー'))
+    await dispatch().catch(() => this.unusableHandring('先着クーポン発行エラー'))
   }
 }

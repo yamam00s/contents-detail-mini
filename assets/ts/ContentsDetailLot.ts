@@ -14,6 +14,6 @@ export default class ContentsDetailLot extends ConentsDetail {
   }
 
   public async dispatchContents(dispatch: () => Promise<void>): Promise<void> {
-    await dispatch().catch(() => this.errorHandring('抽選クーポン発行エラー'))
+    await dispatch().catch(() => this.unusableHandring('抽選クーポン発行エラー'))
   }
 }
