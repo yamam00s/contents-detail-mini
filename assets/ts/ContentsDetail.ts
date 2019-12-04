@@ -5,16 +5,23 @@ export default class ConentsDetail {
   public readonly contents!: Contents
   public readonly status!: Status
   public readonly stock!: Stock
+  // errorメソッド以外から書き換えられないようにする
+  private _unusableMessage!: string
 
   constructor(
     init: Partial<ConentsDetail>
   ) {
-    Object.assign(this, init);
+    Object.assign(this, init)
+    this._unusableMessage = ''
+  }
+
+  get unusableMessage(): string {
+    return this._unusableMessage;
   }
 
   // エラー処理
   public errorHandring(message: string): void {
-    console.log(message)
+    this._unusableMessage = message
   }
 
   // 在庫の確認

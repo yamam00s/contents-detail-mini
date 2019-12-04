@@ -5,6 +5,10 @@
       :contents="contents"
       @dispatch-contents="dispatchContents"
     />
+
+    <div v-if="isUnusable">
+      <p>{{ contentsDetail.unusableMessage }}</p>
+    </div>
   </div>
 </template>
 
@@ -47,6 +51,10 @@ export default class contents extends Vue {
 
   get componentsName(): string {
     return `Contents${this.contents.contents_type}`
+  }
+
+  get isUnusable(): boolean {
+    return !!this.contentsDetail.unusableMessage
   }
 
   private async dispatchContents(): Promise<void> {
