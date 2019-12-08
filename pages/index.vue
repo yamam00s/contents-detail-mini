@@ -50,7 +50,7 @@ export default class contents extends Vue {
   contentsAction!: () => Promise<void>
 
   get componentsName(): string {
-    return `Contents${this.contents.contents_type}`
+    return `CdContents${this.contents.contents_type}`
   }
 
   get isUnusable(): boolean {
