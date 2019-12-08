@@ -1,11 +1,11 @@
 <template>
   <div class="contents">
-    ContentsFirst
+    ContentsLot
     <button
       type="button"
       @click="$emit('dispatch-contents')"
     >
-      発行する
+      抽選する
     </button>
   </div>
 </template>
@@ -19,7 +19,7 @@ import {
 import { Contents } from "~/types";
 
 @Component({})
-export default class ContentsFirst extends Vue {
+export default class CdContentsLot extends Vue {
   @Prop() contents!: Contents
 }
 </script>

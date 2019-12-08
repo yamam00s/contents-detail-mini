@@ -19,7 +19,7 @@ import {
 import { Contents } from "~/types";
 
 @Component({})
-export default class ContentsTerm extends Vue {
+export default class CdContentsTerm extends Vue {
   @Prop() contents!: Contents
 }
 </script>

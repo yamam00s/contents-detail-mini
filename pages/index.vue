@@ -21,9 +21,9 @@ import { Getter, Action } from "vuex-class"
 import { Context } from "@nuxt/types"
 import { Contents, Status, Stock } from "~/types"
 // components
-import ContentsFirst from "~/components/ContentsFirst.vue"
-import ContentsLot from "~/components/ContentsLot.vue"
-import ContentsTerm from "~/components/ContentsTerm.vue"
+import CdContentsFirst from "~/components/CdContentsFirst.vue"
+import CdContentsLot from "~/components/CdContentsLot.vue"
+import CdContentsTerm from "~/components/CdContentsTerm.vue"
 // class
 import ConentsDetail from "~/assets/ts/ContentsDetail"
 import ConentsDetailFirst from "~/assets/ts/ContentsDetailFirst"
@@ -32,9 +32,9 @@ import ConentsDetailTerm from "~/assets/ts/ContentsDetailTerm"
 
 @Component({
   components: {
-    ContentsFirst,
-    ContentsLot,
-    ContentsTerm
+    CdContentsFirst,
+    CdContentsLot,
+    CdContentsTerm
   }
 })
 export default class contents extends Vue {
