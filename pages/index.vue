@@ -5,12 +5,12 @@
       :contents="contents"
       :status="status"
       :stock="stock"
-      @dispatch-contents="dispatchContents"
+      :dispatch-contents="postFirstContents"
     />
 
-    <div v-if="isUnusable">
+    <!-- <div v-if="isUnusable">
       <p>{{ contentsDetail.unusableMessage }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 

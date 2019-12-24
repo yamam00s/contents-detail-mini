@@ -13,7 +13,7 @@ export default class ContentsDetailFirst extends ConentsDetail {
     this.checkTerm()
   }
 
-  public async dispatchContents(dispatch: () => Promise<void>): Promise<void> {
+  public async dispatchFirstContents(dispatch: () => Promise<void>): Promise<void> {
     await dispatch().catch(() => this.unusableHandring('先着クーポン発行エラー'))
   }
 }

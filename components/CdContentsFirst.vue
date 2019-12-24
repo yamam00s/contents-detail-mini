@@ -3,7 +3,7 @@
     ContentsFirst
     <button
       type="button"
-      @click="$emit('dispatch-contents')"
+      @click="dispatchContents"
     >
       発行する
     </button>
@@ -24,8 +24,15 @@ export default class CdContentsFirst extends Vue {
   @Prop() contents!: Contents
   @Prop() status!: Status
   @Prop() stock!: Stock
+  @Prop() dispatchContents!: () => Promise<void>
 
   contentsDetail!: ConentsDetailFirst
+
+  private dispatchFirstContents(): void {
+    this.contentsDetail.dispatchFirstContents(
+      this.dispatchContents
+    )
+  }
 
   mounted() {
     this.contentsDetail = new ConentsDetailFirst({
