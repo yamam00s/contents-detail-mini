@@ -26,10 +26,6 @@ import { Contents, Status, Stock } from "~/types"
 import CdContentsFirst from "~/components/CdContentsFirst.vue"
 import CdContentsLot from "~/components/CdContentsLot.vue"
 import CdContentsTerm from "~/components/CdContentsTerm.vue"
-// class
-import ConentsDetail from "~/assets/ts/ContentsDetail"
-import ConentsDetailLot from "~/assets/ts/ContentsDetailLot"
-import ConentsDetailTerm from "~/assets/ts/ContentsDetailTerm"
 
 @Component({
   components: {

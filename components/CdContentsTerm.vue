@@ -19,7 +19,6 @@ import {
 import { Contents, Status, Stock  } from "~/types";
 import ConentsDetailTerm from "~/assets/ts/ContentsDetailTerm"
 
-
 @Component({})
 export default class CdContentsTerm extends Vue {
   @Prop() contents!: Contents
@@ -37,3 +36,6 @@ export default class CdContentsTerm extends Vue {
     this.contentsDetail.init()
   }
 }
+</script>
+
+<style scoped></style>
