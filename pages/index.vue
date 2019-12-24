@@ -1,42 +1,48 @@
 <template>
   <div>
-    <template v-if="isError">
-      <p>エラーです！</p>
-    </template>
-    <template v-if="!isError">
-      <template v-if="!unusableMessage">
-        <CdContentsFirst
-          v-if="contents.contents_type === 'First'"
-          :contents="contents"
-          :status="status"
-          :stock="stock"
-          :dispatch-contents="postFirstContents"
-          @set-unusable-message="setUnusableMessage"
-        />
-
-        <CdContentsLot
-          v-if="contents.contents_type === 'Lot'"
-          :contents="contents"
-          :status="status"
-          :stock="stock"
-          :dispatch-contents="postLotContents"
-          @set-unusable-message="setUnusableMessage"
-        />
-
-        <CdContentsTerm
-          v-if="contents.contents_type === 'Term'"
-          :contents="contents"
-          :status="status"
-          :stock="stock"
-          :dispatch-contents="postTermContents"
-          @set-unusable-message="setUnusableMessage"
-        />
+    <p v-show="isLoading">Loading...</p>
+    <div v-show="!isLoading">
+      <template v-if="isError">
+        <p>エラーです！</p>
       </template>
+      <template v-if="!isError">
+        <template v-if="!unusableMessage">
+          <CdContentsFirst
+            v-if="contents.contents_type === 'First'"
+            :contents="contents"
+            :status="status"
+            :stock="stock"
+            :dispatch-contents="postFirstContents"
+            @set-unusable-message="setUnusableMessage"
+            @end-loading="setIsLoading"
+          />
 
-      <div v-if="unusableMessage">
-        <p>{{ unusableMessage }}</p>
-      </div>
-    </template>
+          <CdContentsLot
+            v-if="contents.contents_type === 'Lot'"
+            :contents="contents"
+            :status="status"
+            :stock="stock"
+            :dispatch-contents="postLotContents"
+            @set-unusable-message="setUnusableMessage"
+            @end-loading="setIsLoading"
+          />
+
+          <CdContentsTerm
+            v-if="contents.contents_type === 'Term'"
+            :contents="contents"
+            :status="status"
+            :stock="stock"
+            :dispatch-contents="postTermContents"
+            @set-unusable-message="setUnusableMessage"
+            @end-loading="setIsLoading"
+          />
+        </template>
+
+        <div v-if="unusableMessage">
+          <p>{{ unusableMessage }}</p>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -68,11 +74,20 @@ export default class contents extends Vue {
   @Action('contents/postLotContents') postLotContents!: any
   @Action('contents/postTermContents') postTermContents!: any
 
+  isLoading!: boolean
   isError: boolean = false
   unusableMessage: string = ''
 
   private setUnusableMessage(message: string): void {
     this.unusableMessage = message
+  }
+
+  private setIsLoading(isLoading: boolean): void {
+    this.isLoading = isLoading
+  }
+
+  created() {
+    this.setIsLoading(true)
   }
 
   async asyncData (context: Context) {
