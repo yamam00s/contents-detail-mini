@@ -24,8 +24,15 @@ export default class CdContentsTerm extends Vue {
   @Prop() contents!: Contents
   @Prop() status!: Status
   @Prop() stock!: Stock
+  @Prop() dispatchContents!: () => Promise<void>
 
   contentsDetail!: ConentsDetailTerm
+
+  private dispatchTermContents(): void {
+    this.contentsDetail.dispatchTermContents(
+      this.dispatchContents
+    )
+  }
 
   mounted() {
     this.contentsDetail = new ConentsDetailTerm({

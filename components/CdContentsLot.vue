@@ -25,8 +25,15 @@ export default class CdContentsLot extends Vue {
   @Prop() contents!: Contents
   @Prop() status!: Status
   @Prop() stock!: Stock
+  @Prop() dispatchContents!: () => Promise<void>
 
   contentsDetail!: ConentsDetailLot
+
+  private dispatchLotContents(): void {
+    this.contentsDetail.dispatchLotContents(
+      this.dispatchContents
+    )
+  }
 
   mounted() {
     this.contentsDetail = new ConentsDetailLot({

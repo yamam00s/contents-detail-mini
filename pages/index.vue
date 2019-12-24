@@ -1,13 +1,26 @@
 <template>
   <div>
-    <component
-      :is="componentsName"
+    <CdContentsFirst
+      v-if="contents.contents_type === 'First'"
       :contents="contents"
       :status="status"
       :stock="stock"
       :dispatch-contents="postFirstContents"
     />
-
+    <CdContentsLot
+      v-if="contents.contents_type === 'Lot'"
+      :contents="contents"
+      :status="status"
+      :stock="stock"
+      :dispatch-contents="postLotContents"
+    />
+    <CdContentsTerm
+      v-if="contents.contents_type === 'Term'"
+      :contents="contents"
+      :status="status"
+      :stock="stock"
+      :dispatch-contents="postTermContents"
+    />
     <!-- <div v-if="isUnusable">
       <p>{{ contentsDetail.unusableMessage }}</p>
     </div> -->
@@ -41,9 +54,6 @@ export default class contents extends Vue {
   @Action('contents/postFirstContents') postFirstContents!: any
   @Action('contents/postLotContents') postLotContents!: any
   @Action('contents/postTermContents') postTermContents!: any
-
-  // TODO 型安全ではない
-  contentsAction!: () => Promise<void>
 
   get componentsName(): string {
     return `CdContents${this.contents.contents_type}`
