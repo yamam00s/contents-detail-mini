@@ -41,6 +41,10 @@ export default class CdContentsTerm extends Vue {
       stock: this.stock
     })
     this.contentsDetail.init()
+    this.$emit(
+      'set-unusable-message',
+      this.contentsDetail.unusableMessage
+    )
   }
 }
 </script>

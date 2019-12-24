@@ -42,6 +42,10 @@ export default class CdContentsLot extends Vue {
       stock: this.stock
     })
     this.contentsDetail.init()
+    this.$emit(
+      'set-unusable-message',
+      this.contentsDetail.unusableMessage
+    )
   }
 }
 </script>

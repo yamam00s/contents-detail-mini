@@ -4,31 +4,39 @@
       <p>エラーです！</p>
     </template>
     <template v-if="!isError">
-      <CdContentsFirst
-        v-if="contents.contents_type === 'First'"
-        :contents="contents"
-        :status="status"
-        :stock="stock"
-        :dispatch-contents="postFirstContents"
-      />
-      <CdContentsLot
-        v-if="contents.contents_type === 'Lot'"
-        :contents="contents"
-        :status="status"
-        :stock="stock"
-        :dispatch-contents="postLotContents"
-      />
-      <CdContentsTerm
-        v-if="contents.contents_type === 'Term'"
-        :contents="contents"
-        :status="status"
-        :stock="stock"
-        :dispatch-contents="postTermContents"
-      />
+      <template v-if="!unusableMessage">
+        <CdContentsFirst
+          v-if="contents.contents_type === 'First'"
+          :contents="contents"
+          :status="status"
+          :stock="stock"
+          :dispatch-contents="postFirstContents"
+          @set-unusable-message="setUnusableMessage"
+        />
+
+        <CdContentsLot
+          v-if="contents.contents_type === 'Lot'"
+          :contents="contents"
+          :status="status"
+          :stock="stock"
+          :dispatch-contents="postLotContents"
+          @set-unusable-message="setUnusableMessage"
+        />
+
+        <CdContentsTerm
+          v-if="contents.contents_type === 'Term'"
+          :contents="contents"
+          :status="status"
+          :stock="stock"
+          :dispatch-contents="postTermContents"
+          @set-unusable-message="setUnusableMessage"
+        />
+      </template>
+
+      <div v-if="unusableMessage">
+        <p>{{ unusableMessage }}</p>
+      </div>
     </template>
-    <!-- <div v-if="isUnusable">
-      <p>{{ contentsDetail.unusableMessage }}</p>
-    </div> -->
   </div>
 </template>
 
@@ -61,6 +69,11 @@ export default class contents extends Vue {
   @Action('contents/postTermContents') postTermContents!: any
 
   isError: boolean = false
+  unusableMessage: string = ''
+
+  private setUnusableMessage(message: string): void {
+    this.unusableMessage = message
+  }
 
   async asyncData (context: Context) {
     try {
