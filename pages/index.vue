@@ -1,26 +1,31 @@
 <template>
   <div>
-    <CdContentsFirst
-      v-if="contents.contents_type === 'First'"
-      :contents="contents"
-      :status="status"
-      :stock="stock"
-      :dispatch-contents="postFirstContents"
-    />
-    <CdContentsLot
-      v-if="contents.contents_type === 'Lot'"
-      :contents="contents"
-      :status="status"
-      :stock="stock"
-      :dispatch-contents="postLotContents"
-    />
-    <CdContentsTerm
-      v-if="contents.contents_type === 'Term'"
-      :contents="contents"
-      :status="status"
-      :stock="stock"
-      :dispatch-contents="postTermContents"
-    />
+    <template v-if="isError">
+      <p>エラーです！</p>
+    </template>
+    <template v-if="!isError">
+      <CdContentsFirst
+        v-if="contents.contents_type === 'First'"
+        :contents="contents"
+        :status="status"
+        :stock="stock"
+        :dispatch-contents="postFirstContents"
+      />
+      <CdContentsLot
+        v-if="contents.contents_type === 'Lot'"
+        :contents="contents"
+        :status="status"
+        :stock="stock"
+        :dispatch-contents="postLotContents"
+      />
+      <CdContentsTerm
+        v-if="contents.contents_type === 'Term'"
+        :contents="contents"
+        :status="status"
+        :stock="stock"
+        :dispatch-contents="postTermContents"
+      />
+    </template>
     <!-- <div v-if="isUnusable">
       <p>{{ contentsDetail.unusableMessage }}</p>
     </div> -->
@@ -55,15 +60,19 @@ export default class contents extends Vue {
   @Action('contents/postLotContents') postLotContents!: any
   @Action('contents/postTermContents') postTermContents!: any
 
-  get componentsName(): string {
-    return `CdContents${this.contents.contents_type}`
-  }
+  isError: boolean = false
 
-  async fetch (context: Context) {
-    const { store } = context
-    await store.dispatch('contents/fetchContents')
-    await store.dispatch('contents/fetchStatus')
-    await store.dispatch('contents/fetchStock')
+  async asyncData (context: Context) {
+    try {
+      const { store } = context
+      await store.dispatch('contents/fetchContents')
+      await store.dispatch('contents/fetchStatus')
+      await store.dispatch('contents/fetchStock')
+    } catch {
+      return {
+        isError: true
+      }
+    }
   }
 }
 </script>
