@@ -16,12 +16,24 @@ import {
   Prop,
   Vue
 } from "nuxt-property-decorator"
-import { Contents } from "~/types";
+import { Contents, Status, Stock  } from "~/types";
+import ConentsDetailTerm from "~/assets/ts/ContentsDetailTerm"
+
 
 @Component({})
 export default class CdContentsTerm extends Vue {
   @Prop() contents!: Contents
-}
-</script>
+  @Prop() status!: Status
+  @Prop() stock!: Stock
 
-<style scoped></style>
+  contentsDetail!: ConentsDetailTerm
+
+  mounted() {
+    this.contentsDetail = new ConentsDetailTerm({
+      contents: this.contents,
+      status: this.status,
+      stock: this.stock
+    })
+    this.contentsDetail.init()
+  }
+}

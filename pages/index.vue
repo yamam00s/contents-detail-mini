@@ -3,6 +3,8 @@
     <component
       :is="componentsName"
       :contents="contents"
+      :status="status"
+      :stock="stock"
       @dispatch-contents="dispatchContents"
     />
 
@@ -26,7 +28,6 @@ import CdContentsLot from "~/components/CdContentsLot.vue"
 import CdContentsTerm from "~/components/CdContentsTerm.vue"
 // class
 import ConentsDetail from "~/assets/ts/ContentsDetail"
-import ConentsDetailFirst from "~/assets/ts/ContentsDetailFirst"
 import ConentsDetailLot from "~/assets/ts/ContentsDetailLot"
 import ConentsDetailTerm from "~/assets/ts/ContentsDetailTerm"
 
@@ -46,46 +47,10 @@ export default class contents extends Vue {
   @Action('contents/postTermContents') postTermContents!: any
 
   // TODO 型安全ではない
-  contentsDetail!: ConentsDetailFirst | ConentsDetailLot | ConentsDetailTerm
   contentsAction!: () => Promise<void>
 
   get componentsName(): string {
     return `CdContents${this.contents.contents_type}`
-  }
-
-  get isUnusable(): boolean {
-    return !!this.contentsDetail.unusableMessage
-  }
-
-  private async dispatchContents(): Promise<void> {
-    const action = this.postFirstContents
-    await this.contentsDetail.dispatchContents(
-      this.contentsAction
-    )
-  }
-
-  created() {
-    const typeName: string = this.contents.contents_type
-    const initItem: Partial<ConentsDetail> = {
-      contents: this.contents,
-      status: this.status,
-      stock: this.stock
-    }
-
-    if (typeName === 'First') {
-      this.contentsDetail = new ConentsDetailFirst(initItem)
-      this.contentsAction = this.postFirstContents
-    }
-    if (typeName === 'Lot') {
-      this.contentsDetail = new ConentsDetailLot(initItem)
-      this.contentsAction = this.postLotContents
-    }
-    if (typeName === 'Term') {
-      this.contentsDetail = new ConentsDetailTerm(initItem)
-      this.contentsAction = this.postTermContents
-    }
-
-    if (this.contentsDetail) this.contentsDetail.init()
   }
 
   async fetch (context: Context) {
