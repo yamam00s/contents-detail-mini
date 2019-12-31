@@ -1,8 +1,8 @@
-import ConentsDetail from "~/assets/ts/ContentsDetail"
+import ContentsDetail from "~/assets/ts/ContentsDetail"
 
-export default class ContentsDetailTerm extends ConentsDetail {
+export default class ContentsDetailTerm extends ContentsDetail {
   constructor(
-    init: Partial<ConentsDetail>
+    init: Partial<ContentsDetail>
   ){
     super(init)
   }

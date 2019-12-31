@@ -1,7 +1,7 @@
 import { Contents, Status, Stock } from "~/types"
 import dayjs from "dayjs";
 
-export default class ConentsDetail {
+export default class ContentsDetail {
   public readonly contents!: Contents
   public readonly status!: Status
   public readonly stock!: Stock
@@ -9,7 +9,7 @@ export default class ConentsDetail {
   private _unusableMessage!: string
 
   constructor(
-    init: Partial<ConentsDetail>
+    init: Partial<ContentsDetail>
   ) {
     Object.assign(this, init)
     this._unusableMessage = ''

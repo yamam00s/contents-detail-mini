@@ -17,7 +17,7 @@ import {
   Vue
 } from "nuxt-property-decorator"
 import { Contents, Status, Stock  } from "~/types";
-import ConentsDetailFirst from "~/assets/ts/ContentsDetailFirst"
+import ContentsDetailFirst from "~/assets/ts/ContentsDetailFirst"
 
 @Component({})
 export default class CdContentsFirst extends Vue {
@@ -26,7 +26,7 @@ export default class CdContentsFirst extends Vue {
   @Prop() stock!: Stock
   @Prop() dispatchContents!: () => Promise<void>
 
-  contentsDetail!: ConentsDetailFirst
+  contentsDetail!: ContentsDetailFirst
 
   private dispatchFirstContents(): void {
     this.contentsDetail.dispatchFirstContents(
@@ -35,7 +35,7 @@ export default class CdContentsFirst extends Vue {
   }
 
   mounted() {
-    this.contentsDetail = new ConentsDetailFirst({
+    this.contentsDetail = new ContentsDetailFirst({
       contents: this.contents,
       status: this.status,
       stock: this.stock
